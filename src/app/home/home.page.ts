@@ -1,9 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChatService, Message } from '../services/chat.service';
 import { NgIf, NgFor } from '@angular/common';
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -14,7 +16,14 @@ import { NgIf, NgFor } from '@angular/common';
 export class HomePage implements OnInit {
   messages: Message[] = [];
   newMessage = '';
-  userName = 'Darwin Cachimi';
+  userName = '';
+  age = 0; 
+  lastName = ''; 
+  address = ''; 
+  birthDate = ''; 
+  career = ''; 
+  phoneNumber = ''; 
+  maritalStatus = ''; 
 
   constructor(private chatService: ChatService) {}
 
@@ -26,7 +35,14 @@ export class HomePage implements OnInit {
 
   sendMessage() {
     if (this.newMessage.trim() !== '') {
-      this.chatService.sendMessage(this.newMessage, this.userName);
+      this.chatService.sendMessage(
+        this.newMessage,
+        this.userName,
+        this.age,
+        this.lastName,
+        this.address,
+        this.birthDate
+      );
       this.newMessage = '';
     }
   }

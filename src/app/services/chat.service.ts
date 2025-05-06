@@ -1,12 +1,20 @@
+
+
 import { Injectable } from '@angular/core';
-import {Firestore,collection,addDoc,collectionData,query,orderBy } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, query, orderBy } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-
 export interface Message {
-  text: string;
+  content: string;
   createdAt: number;
-  sender: string;
+  userName: string;
+  lastName?: string;
+  age?: number;
+  birthDate?: string;
+  address?: string;
+  career?: string;
+  phoneNumber?: string;
+  maritalStatus?: string;
 }
 
 @Injectable({
@@ -16,21 +24,27 @@ export class ChatService {
 
   constructor(private firestore: Firestore) { }
 
-getMessages(): Observable<Message[]>{
-  const messageRef = collection(this.firestore,'messages');
-  const q = query(messageRef,orderBy('createdAt'));
-  return collectionData(q, { idField: 'id' }) as Observable<Message[]>;
-}
-
-
-sendMessage(text:string, sender:string){
-  const messagesRef = collection(this.firestore, 'messages')
-  const message: Message = {
-    text,
-    createdAt: Date.now(),
-    sender
+  getMessages(): Observable<Message[]> {
+    const messageRef = collection(this.firestore, 'messages');
+    const q = query(messageRef, orderBy('createdAt'));
+    return collectionData(q, { idField: 'id' }) as Observable<Message[]>;
   }
 
-  return addDoc(messagesRef,message)
-}
+  sendMessage(content: string, userName: string, age?: number, lastName?: string, address?: string, birthDate?: string) {
+    const messagesRef = collection(this.firestore, 'messages');
+    const message: Message = {
+      content,
+      createdAt: Date.now(),
+      userName,
+      lastName,
+      age,
+      address,
+      birthDate,
+      career: '', 
+      phoneNumber: '', 
+      maritalStatus: '' 
+    };
+  
+    return addDoc(messagesRef, message);
+  }
 }

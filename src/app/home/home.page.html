@@ -1,17 +1,25 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Chat 2025A
+      Formulario
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let msg of messages">
+    <!-- Mostrar los mensajes con los datos adicionales -->
+    <ion-item *ngFor="let msg of messages" class="message-item">
       <ion-label>
-        <h3>{{ msg.sender }}</h3>
-        <p>{{ msg.text }}</p>
+        <h3>{{ msg.userName }} {{ msg.lastName }}</h3>
+        <p><strong>Edad:</strong> {{ msg.age }}</p>
+        <p><strong>Dirección:</strong> {{ msg.address }}</p>
+        <p><strong>Mensaje:</strong> {{ msg.content }}</p>
+        <p><strong>Carrera:</strong> {{ msg.career }}</p>
+        <p><strong>Número telefónico:</strong> {{ msg.phoneNumber }}</p>
+        <p><strong>Estado civil:</strong> {{ msg.maritalStatus }}</p>
+        <small><strong>Fecha de nacimiento:</strong> {{ msg.birthDate }}</small>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -19,7 +27,45 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje" fill="outline"></ion-input>
+    <!-- Campos para ingresar los datos adicionales -->
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="userName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input [(ngModel)]="lastName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Edad</ion-label>
+      <ion-input type="number" [(ngModel)]="age"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Dirección</ion-label>
+      <ion-input [(ngModel)]="address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Número telefónico</ion-label>
+      <ion-input type="tel" [(ngModel)]="phoneNumber"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Carrera</ion-label>
+      <ion-input type="tel" [(ngModel)]="career"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Estado civil</ion-label>
+      <ion-select [(ngModel)]="maritalStatus" placeholder="Selecciona tu estado civil">
+        <ion-select-option value="soltero">Soltero</ion-select-option>
+        <ion-select-option value="casado">Casado</ion-select-option>
+        <ion-select-option value="divorciado">Divorciado</ion-select-option>
+        <ion-select-option value="viudo">Viudo</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mensaje</ion-label>
+      <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje"></ion-input>
+    </ion-item>
+    
     <ion-button expand="block" (click)="sendMessage()">Enviar</ion-button>
   </ion-toolbar>
 </ion-footer>
