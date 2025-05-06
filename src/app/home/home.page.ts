@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   age = 0; 
   lastName = ''; 
   address = ''; 
-  birthDate = ''; 
+  birthDate = new Date(); 
   career = ''; 
   phoneNumber = ''; 
   maritalStatus = ''; 
@@ -41,7 +41,10 @@ export class HomePage implements OnInit {
         this.age,
         this.lastName,
         this.address,
-        this.birthDate
+        this.birthDate,
+        this.career,
+        this.phoneNumber,
+        this.maritalStatus
       );
       this.newMessage = '';
     }

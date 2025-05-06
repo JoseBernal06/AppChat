@@ -1,7 +1,5 @@
-
-
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, query, orderBy } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, query, orderBy, DocumentReference, DocumentData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 export interface Message {
@@ -10,7 +8,7 @@ export interface Message {
   userName: string;
   lastName?: string;
   age?: number;
-  birthDate?: string;
+  birthDate?: Date;
   address?: string;
   career?: string;
   phoneNumber?: string;
@@ -30,7 +28,17 @@ export class ChatService {
     return collectionData(q, { idField: 'id' }) as Observable<Message[]>;
   }
 
-  sendMessage(content: string, userName: string, age?: number, lastName?: string, address?: string, birthDate?: string) {
+  sendMessage(
+    content: string,
+    userName: string,
+    age?: number,
+    lastName?: string,
+    address?: string,
+    birthDate?: Date,
+    career?: string,
+    phoneNumber?: string,
+    maritalStatus?: string
+  ): Promise<DocumentReference<DocumentData>> { // Cambiado el tipo de retorno
     const messagesRef = collection(this.firestore, 'messages');
     const message: Message = {
       content,
@@ -40,11 +48,10 @@ export class ChatService {
       age,
       address,
       birthDate,
-      career: '', 
-      phoneNumber: '', 
-      maritalStatus: '' 
+      career,
+      phoneNumber,
+      maritalStatus
     };
-  
-    return addDoc(messagesRef, message);
+    return addDoc(messagesRef, message); // Esto devuelve un Promise<DocumentReference<DocumentData>>
   }
 }

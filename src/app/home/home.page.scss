@@ -25,3 +25,14 @@
 #container a {
   text-decoration: none;
 }
+
+ion-datetime {
+  --background: #ffffff; /* Fondo blanco */
+  --color: #333333; /* Texto oscuro */
+  --border-radius: 8px; /* Bordes redondeados */
+  --padding: 10px;
+  --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  max-width: 400px; /* Limita el ancho máximo */
+  margin: 0 auto; /* Centra el calendario */
+}
